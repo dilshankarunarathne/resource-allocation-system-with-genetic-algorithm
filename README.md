@@ -142,7 +142,7 @@ The generated timetables will include:
 - Courses taught in each time slot
 - Lecturer for each course
 - Hall where each course is taught
-- 
+
 ## License
 
 This work is licensed under a
