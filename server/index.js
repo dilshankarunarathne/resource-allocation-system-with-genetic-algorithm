@@ -140,4 +140,17 @@ const lecturers = [
 
 const ga = new GeneticAlgorithm(batches, halls, lecturers, 100, 0.01, 1000);
 const bestTimetable = ga.run();
-console.log(JSON.stringify(bestTimetable, null, 2));
+
+function displayTimetable(timetable) {
+  for (const batch in timetable) {
+    console.log(`\nTimetable for Batch: ${batch}`);
+    console.log('Day\tSlot\tCourse\tHall\tLecturer');
+    timetable[batch].forEach((day, dayIndex) => {
+      day.forEach((slot, slotIndex) => {
+        console.log(`${dayIndex + 1}\t${slotIndex + 1}\t${slot.course}\t${slot.hall.name}\t${slot.lecturer.name}`);
+      });
+    });
+  }
+}
+
+displayTimetable(bestTimetable);
