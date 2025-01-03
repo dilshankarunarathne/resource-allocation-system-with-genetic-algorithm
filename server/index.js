@@ -42,9 +42,12 @@ class GeneticAlgorithm {
       for (const day of timetable[batch]) {
         for (const slot of day) {
           // Check hall capacity
-          const hallCapacity = this.halls.find(h => h.name === slot.hall).capacity;
-          const batchSize = this.batches.find(b => b.name === batch).size;
-          if (hallCapacity >= batchSize) fitness++;
+          const hall = this.halls.find(h => h.name === slot.hall);
+          if (hall) {
+            const hallCapacity = hall.capacity;
+            const batchSize = this.batches.find(b => b.name === batch).size;
+            if (hallCapacity >= batchSize) fitness++;
+          }
 
           // Check lecturer availability
           const lecturerCourses = this.lecturers.find(l => l.name === slot.lecturer).courses;
