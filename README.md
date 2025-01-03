@@ -22,6 +22,27 @@ The genetic algorithm is the core technique used in this project. It simulates e
 5. **Mutation**: Introduce random changes to offspring to maintain diversity.
 6. **Termination**: Define a termination condition, such as a maximum number of generations or a satisfactory fitness score.
 
+## Project Requirements
+
+- **Batches**: 3-4 batches (e.g., 2019 batch, 2020 batch, 2021 batch)
+- **Courses**: Each batch has 6-9 courses (e.g., CS2113, CS3211, EO1205)
+- **Halls**: Several halls for lectures (e.g., scala hall, python hall, java hall)
+- **Lecturers**: Department lecturers who conduct lectures (e.g., Mr Sam, Ms Jones)
+- **Time Slots**: Each weekday is divided into 8 one-hour time slots
+- **Constraints**: 
+  - Unique time slots for courses across batches
+  - Lecturer availability
+  - Hall capacity
+  - No overlapping schedules for students
+
+## Output
+
+The generated timetables will include:
+- Time slots for each day of the week
+- Courses taught in each time slot
+- Lecturer for each course
+- Hall where each course is taught
+
 ### Example Code
 
 ```javascript
@@ -121,27 +142,6 @@ function displayTimetable(timetable) {
 
 displayTimetable(bestTimetable);
 ```
-
-## Project Requirements
-
-- **Batches**: 3-4 batches (e.g., 2019 batch, 2020 batch, 2021 batch)
-- **Courses**: Each batch has 6-9 courses (e.g., CS2113, CS3211, EO1205)
-- **Halls**: Several halls for lectures (e.g., scala hall, python hall, java hall)
-- **Lecturers**: Department lecturers who conduct lectures (e.g., Mr Sam, Ms Jones)
-- **Time Slots**: Each weekday is divided into 8 one-hour time slots
-- **Constraints**: 
-  - Unique time slots for courses across batches
-  - Lecturer availability
-  - Hall capacity
-  - No overlapping schedules for students
-
-## Output
-
-The generated timetables will include:
-- Time slots for each day of the week
-- Courses taught in each time slot
-- Lecturer for each course
-- Hall where each course is taught
 
 ## License
 
