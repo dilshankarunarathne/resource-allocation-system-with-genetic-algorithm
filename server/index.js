@@ -140,4 +140,4 @@ const lecturers = [
 
 const ga = new GeneticAlgorithm(batches, halls, lecturers, 100, 0.01, 1000);
 const bestTimetable = ga.run();
-console.log(bestTimetable);
+console.log(JSON.stringify(bestTimetable, null, 2));
