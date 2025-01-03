@@ -1,6 +1,16 @@
 # Resource Allocation System using Genetic Algorithm
 
-This is a final year research work of a Bachelor of Computer Science student at the Department of Computer Science, Faculty of Applied Science, Trincomalee Campus, Eastern University of Sri Lanka.
+This project is a final year research work by a Bachelor of Computer Science student at the Department of Computer Science, Faculty of Applied Science, Trincomalee Campus, Eastern University of Sri Lanka.
+
+## Overview
+
+The "Resource Allocation System Using Genetic Algorithm" aims to solve the problem of scheduling resources across multiple batches within the Department of Computer Science. The system uses a genetic algorithm to generate optimal timetables that satisfy various constraints.
+
+## Genetic Algorithm Implementation
+
+The genetic algorithm is the core technique used in this project. It simulates evolution by iteratively generating, evaluating, and refining potential solutions.
+
+### Key Steps
 
 1. **Population Initialization**: Create an initial population of possible solutions.
 2. **Fitness Function**: Define a fitness function to evaluate how well each solution meets the constraints.
@@ -9,9 +19,14 @@ This is a final year research work of a Bachelor of Computer Science student at 
 5. **Mutation**: Introduce random changes to offspring to maintain diversity.
 6. **Termination**: Define a termination condition, such as a maximum number of generations or a satisfactory fitness score.
 
+### Example Code
+
 ```javascript
 class GeneticAlgorithm {
-  constructor(populationSize, mutationRate, generations) {
+  constructor(batches, halls, lecturers, populationSize, mutationRate, generations) {
+    this.batches = batches;
+    this.halls = halls;
+    this.lecturers = lecturers;
     this.populationSize = populationSize;
     this.mutationRate = mutationRate;
     this.generations = generations;
@@ -23,8 +38,13 @@ class GeneticAlgorithm {
     // ...code to initialize population...
   }
 
-  fitnessFunction(solution) {
-    // Evaluate fitness of a solution
+  generateRandomTimetable() {
+    // Generate a random timetable
+    // ...code to generate random timetable...
+  }
+
+  fitnessFunction(timetable) {
+    // Evaluate fitness of a timetable
     // ...code to calculate fitness...
   }
 
@@ -38,7 +58,7 @@ class GeneticAlgorithm {
     // ...code for crossover...
   }
 
-  mutate(solution) {
+  mutate(timetable) {
     // Introduce random changes
     // ...code for mutation...
   }
@@ -58,29 +78,64 @@ class GeneticAlgorithm {
       // Check termination condition
       // ...code to check termination...
     }
+    return this.population[0];
   }
 }
 
 // Example usage
-const ga = new GeneticAlgorithm(100, 0.01, 1000);
-ga.run();
+const batches = [
+  { name: '2019', size: 77, courses: ['CS2113', 'CS3211', 'EO1205'] },
+  { name: '2020', size: 80, courses: ['CS1101', 'CS2202', 'CS3303'] },
+  { name: '2021', size: 85, courses: ['CS2113', 'CS2202', 'CS3303'] }
+];
+
+const halls = [
+  { name: 'scala hall', capacity: 70 },
+  { name: 'python hall', capacity: 100 },
+  { name: 'java hall', capacity: 50 }
+];
+
+const lecturers = [
+  { name: 'Mr Sam', courses: ['CS2113', 'CS3211'] },
+  { name: 'Ms Jones', courses: ['EO1205', 'CS1101'] },
+  { name: 'Dr Smith', courses: ['CS2202', 'CS3303'] }
+];
+
+const ga = new GeneticAlgorithm(batches, halls, lecturers, 100, 0.01, 1000);
+const bestTimetable = ga.run();
+
+function displayTimetable(timetable) {
+  for (const batch in timetable) {
+    console.log(`\nTimetable for Batch: ${batch}`);
+    console.log('Day\tSlot\tCourse\tHall\tLecturer');
+    timetable[batch].forEach((day, dayIndex) => {
+      day.forEach((slot, slotIndex) => {
+        console.log(`${dayIndex + 1}\t${slotIndex + 1}\t${slot.course}\t${slot.hall.name}\t${slot.lecturer.name}`);
+      });
+    });
+  }
+}
+
+displayTimetable(bestTimetable);
 ```
 
-The genetic algorithm for scheduling time tables in my campus department.
+## Project Requirements
 
-- there can  be a few batches (about 3-4, eg: 2019 batch, 2020 batch, 2021 batch, etc) students.
-- for each batch, there are a number of courses (about 6-9, eg: CS2113, CS3211, EO1205, etc)
-- there are a few halls that lecturers can conduct lectures in (eg: scala hall, python hall, java hall, etc)
-- each course should have a specific amount of hours to cover with lectures (eg: the course CS3211 of the batch of 2019 should have 30 hours of lectures to be conducted)
-- lectures are conducted in periods of the day. each weekday is divided into 8 one hour time slots (eg: slot 1, slot 2, slot 3, etc)
-- there should be the lecturers of the department who conduct those lectures (eg: Mr sam, Ms jones, etc), and each with the subjects they can teach
-- each batch of students have a number of students (eg: the batch of 2019 has 77 students)
-- each hall has a capacity (eg: the scala hall has a capacity of 70, and the java hall has the capacity of 100)
+- **Batches**: 3-4 batches (e.g., 2019 batch, 2020 batch, 2021 batch)
+- **Courses**: Each batch has 6-9 courses (e.g., CS2113, CS3211, EO1205)
+- **Halls**: Several halls for lectures (e.g., scala hall, python hall, java hall)
+- **Lecturers**: Department lecturers who conduct lectures (e.g., Mr Sam, Ms Jones)
+- **Time Slots**: Each weekday is divided into 8 one-hour time slots
+- **Constraints**: 
+  - Unique time slots for courses across batches
+  - Lecturer availability
+  - Hall capacity
+  - No overlapping schedules for students
 
-Need to implement a genetic algorithm that will generate a time table, for each batch. The time tables should divide the halls and time slots along with the lectures that can teach the subjects.
+## Output
 
-The batch-vise time tables should contain:
-- the time slots for each day in the week
-- the course that is taught in each time slot (there can be free time slots)
-- who teaches the each subject for the batch
-- which hall is it taught in
+The generated timetables will include:
+- Time slots for each day of the week
+- Courses taught in each time slot
+- Lecturer for each course
+- Hall where each course is taught
