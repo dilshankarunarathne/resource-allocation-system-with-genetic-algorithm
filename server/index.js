@@ -50,8 +50,11 @@ class GeneticAlgorithm {
           }
 
           // Check lecturer availability
-          const lecturerCourses = this.lecturers.find(l => l.name === slot.lecturer).courses;
-          if (lecturerCourses.includes(slot.course)) fitness++;
+          const lecturer = this.lecturers.find(l => l.name === slot.lecturer);
+          if (lecturer) {
+            const lecturerCourses = lecturer.courses;
+            if (lecturerCourses.includes(slot.course)) fitness++;
+          }
         }
       }
     }
